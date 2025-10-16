@@ -1,0 +1,36 @@
+{
+  "name": "usb-manager",
+  "version": "1.0.0",
+  "description": "USB Manager",
+  "author": "Sizning Ismingiz",
+  "main": "main.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.yourapp.usbmanager",
+    "productName": "USB Manager",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets/"
+    },
+    "files": [
+      "**/*",
+      "./scripts/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/usb.ico"
+    },
+    "asar": false
+  },
+  "devDependencies": {
+    "electron": "^38.2.2",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "pkcs11js": "^2.1.6"
+  }
+}
