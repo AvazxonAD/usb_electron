@@ -7,21 +7,56 @@
 
     <script src="./CAPIWS.js"></script>
     <script>
-      CAPIWS.version(
-        (event, data) => {
-          console.log("CAPI versiya:", data);
+      const tokens = [];
+      const certifictes = [];
+      CAPIWS.callFunction(
+        {
+          plugin: "ftjc",
+          name: "list_tokens",
         },
-        (err) => {
-          console.error("Xatolik:", err);
+        function (event, data) {
+          tokens.push(data);
+        },
+        function (error) {
+          window.alert(error);
         }
       );
+
       CAPIWS.callFunction(
         {
           plugin: "pfx",
           name: "list_disks",
         },
         function (event, data) {
-          console.log(data);
+          tokens.push(data);
+        },
+        function (error) {
+          window.alert(error);
+        }
+      );
+
+      CAPIWS.callFunction(
+        {
+          plugin: "certkey",
+          name: "list_disks",
+        },
+        function (event, data) {
+          tokens.push(data);
+        },
+        function (error) {
+          window.alert(error);
+        }
+      );
+
+      CAPIWS.callFunction(
+        {
+          plugin: "ytks",
+          name: "list_disks",
+        },
+        function (event, data) {
+          tokens.push(data);
+          console.log("Tokens");
+          console.log(tokens);
         },
         function (error) {
           window.alert(error);
@@ -34,27 +69,66 @@
           name: "list_readers",
         },
         function (event, data) {
+          console.log("Readers");
           console.log(data);
         },
         function (error) {
           window.alert(error);
         }
       );
-    </script>
-    <script>
-      document.getElementById("btn").onclick = () => {
-        CAPIWS.callFunction(
-          { plugin: "pfx", name: "list_disks" },
-          (event, data) => {
-            console.log("Disks:", data);
-            document.getElementById("out").textContent = JSON.stringify(data, null, 2);
-          },
-          (error) => {
-            console.error("Error:", error);
-            document.getElementById("out").textContent = "Error: " + error;
-          }
-        );
-      };
+
+      CAPIWS.callFunction(
+        {
+          plugin: "idcard",
+          name: "list_all_certificates",
+        },
+        function (event, data) {
+          certifictes.push(data);
+        },
+        function (error) {
+          window.alert(error);
+        }
+      );
+
+      CAPIWS.callFunction(
+        {
+          plugin: "pfx",
+          name: "list_all_certificates",
+        },
+        function (event, data) {
+          certifictes.push(data);
+        },
+        function (error) {
+          window.alert(error);
+        }
+      );
+      CAPIWS.callFunction(
+        {
+          plugin: "certkey",
+          name: "list_all_certificates",
+        },
+        function (event, data) {
+          certifictes.push(data);
+        },
+        function (error) {
+          window.alert(error);
+        }
+      );
+
+      CAPIWS.callFunction(
+        {
+          plugin: "ytks",
+          name: "list_all_certificates",
+        },
+        function (event, data) {
+          certifictes.push(data);
+          console.log("Certificates");
+          console.log(certifictes);
+        },
+        function (error) {
+          window.alert(error);
+        }
+      );
     </script>
   </body>
 </html>
