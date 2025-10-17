@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h3>E-IMZO list_disks test</h3>
+    <button id="btn">List Disks</button>
+    <pre id="out"></pre>
+
+    <script src="./CAPIWS.js"></script>
+    <script>
+      CAPIWS.version(
+        (event, data) => {
+          console.log("CAPI versiya:", data);
+        },
+        (err) => {
+          console.error("Xatolik:", err);
+        }
+      );
+      CAPIWS.callFunction(
+        {
+          plugin: "pfx",
+          name: "list_disks",
+        },
+        function (event, data) {
+          console.log(data);
+        },
+        function (error) {
+          window.alert(error);
+        }
+      );
+
+      CAPIWS.callFunction(
+        {
+          plugin: "idcard",
+          name: "list_readers",
+        },
+        function (event, data) {
+          console.log(data);
+        },
+        function (error) {
+          window.alert(error);
+        }
+      );
+    </script>
+    <script>
+      document.getElementById("btn").onclick = () => {
+        CAPIWS.callFunction(
+          { plugin: "pfx", name: "list_disks" },
+          (event, data) => {
+            console.log("Disks:", data);
+            document.getElementById("out").textContent = JSON.stringify(data, null, 2);
+          },
+          (error) => {
+            console.error("Error:", error);
+            document.getElementById("out").textContent = "Error: " + error;
+          }
+        );
+      };
+    </script>
+  </body>
+</html>

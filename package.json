@@ -7,7 +7,8 @@
   "type": "commonjs",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder"
+    "build": "electron-builder",
+    "dev": "nodemon --exec electron ."
   },
   "build": {
     "appId": "com.yourapp.usbmanager",
@@ -31,6 +32,8 @@
     "electron-builder": "^26.0.12"
   },
   "dependencies": {
+    "axios": "^1.12.2",
+    "nodemon": "^3.1.10",
     "pkcs11js": "^2.1.6"
   }
 }
